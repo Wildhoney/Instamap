@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './src/Default.js',
+    entry: './src/default.js',
     output: {
         path: __dirname + '/public',
         filename: 'default.js',
