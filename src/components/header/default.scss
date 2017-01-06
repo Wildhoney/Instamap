@@ -1,10 +1,13 @@
 section.header {
 
   h1 {
-    background-color: rgba(0, 0, 0, .025);
-
-    img {
-      width: 20px;
-    }
+    font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+    font-size: 0.75em;
+    padding: 10px 10px 10px 32px;
+    text-transform: uppercase;
+    background: transparent url('/images/icon.png') no-repeat 10px center;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .05);
+    background-size: 15px;
   }
 }
