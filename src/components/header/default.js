@@ -1,6 +1,5 @@
-import Inferno from 'inferno';
-import Component from 'inferno-component';
-import './Default.scss';
+import React, { Component } from 'react';
+import './default.scss';
 
 export default class Welcome extends Component {
 
