@@ -1,0 +1,25 @@
+language: node_js
+
+node_js:
+  - stable
+
+before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+before_deploy:
+  - npm run build
+  - npm run cleanup
+
+sudo: false
+
+deploy:
+  all_branches: true
+  skip_cleanup: true
+  provider: heroku
+  api_key:
+    secure: CXatCRz+S2jiO5DIQzSG0CzAb+f5NuZ5vnxgZSXGJNCYPC+Ch1N4opUvaAnFpDYnIZYWpWt46gKj8b3UWadAotpKLJZGXrKUEo4fdz5yBCW9VG/snbJ3yhUMMaZCT8KofkfvUNatGa6sW8hPoJepD+fMpKCubdtilBo5auxON3I2MBieKEUwoR/WWsS7bJE4pMsBOqOiMg1L0IL0RqBf/wdjp9vSZpHKJouBmI5+zDPoDoajZJNQ1hUYrp/FDvp6C3qapvequ4cv7M0XS0IMM0UZi0WbyjqHEW9LqZUXdXBS2/tCMw7mib2EcH9sdK73i5SVHfZeebTH0ddMW0nxP+Fjv01pIQUUX+hnd4wEp6G5xWLXICyqEuFxO0Y5peq+xKPOqkd08JZztXjXzL04S7MgnN7FJrRCun95DFAsOzeQhh1qhBMAdXExmAMlDJO3eOQ5jJWHRDvjE2++N0gMj6m2HYtLv5nVvbqmaqSZGpt3rcldJuyz0+INZO6iphzca3AIfE4d8HEUu4OV9qbaQbu59baHfJ9MJ976PtZ75t/5DXEHgxNpxGRqLTem89ZdasxFYWyqTStqnu8rdNLtaafQdBJylSeulR3P97I79LMd6tr/haMRC/Rl7FRC3I+lnCfyZcmaEyHsc5KpyjcFIoeswJBfGXyhtowiOxQiR3o=
+  app: instamap-app
+  on:
+    repo: Wildhoney/Instamap
