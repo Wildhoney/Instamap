@@ -1,7 +1,7 @@
 module.exports = {
     entry: './src/Default.js',
     output: {
-        path: __dirname + '/public/js',
+        path: __dirname + '/public',
         filename: 'default.js',
         libraryTarget: 'var'
     },

@@ -8,6 +8,12 @@ export default class Header extends Component {
      * @return {XML}
      */
     render() {
-        return <h1>Instamap</h1>;
+
+        return (
+            <section className="header">
+                <h1>Instamap</h1>
+            </section>
+        );
+
     }
 }

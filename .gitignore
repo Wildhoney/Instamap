@@ -10,5 +10,5 @@ npm-debug.log
 yarn.lock
 
 # public
-public/js/default.js
-public/css/default.js
+public/default.js
+public/default.js.map
