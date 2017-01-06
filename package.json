@@ -21,5 +21,17 @@
   "bugs": {
     "url": "https://github.com/Wildhoney/Instamap/issues"
   },
-  "homepage": "https://github.com/Wildhoney/Instamap#readme"
+  "homepage": "https://github.com/Wildhoney/Instamap#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-plugin-inferno": "^1.4.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "express": "^4.14.0",
+    "opener": "^1.4.2"
+  },
+  "dependencies": {
+    "inferno": "^1.0.7"
+  }
 }
