@@ -8,3 +8,7 @@
 node_modules
 npm-debug.log
 yarn.lock
+
+# public
+public/js/default.js
+public/css/default.js
