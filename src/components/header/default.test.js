@@ -5,5 +5,5 @@ import Header from './default';
 
 test('It should be able to render the header title;', t => {
     const wrapper = shallow(<Header />);
-    t.is(wrapper.find('h1').text(), 'Instamap');
+    t.is(wrapper.find('h1').text(), 'Instamap.');
 });
