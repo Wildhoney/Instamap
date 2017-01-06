@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './default.scss';
 
-export default class Welcome extends Component {
+export default class Header extends Component {
 
     /**
      * @method render

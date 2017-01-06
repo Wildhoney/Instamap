@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "description": "Towards the end of 2016, Instagram removed the Photo Maps feature. Instagram says it was unused, but we remember! Instamap brings it back for good, open-source and ad-free.",
   "scripts": {
-    "test": "ava",
+    "test": "npm run lint && npm run spec",
+    "spec": "ava",
+    "lint": "xo src/*.js src/**/*.js src/**/**/*.js src/**/**/**/**/*.js",
     "build": "NODE_ENV=production webpack",
-    "watch": "webpack --watch",
+    "watch": "webpack -p --watch",
     "cleanup": "rimraf node_modules"
   },
   "repository": {
@@ -35,15 +37,19 @@
     "babel-register": "^6.18.0",
     "css-loader": "^0.26.1",
     "enzyme": "^2.7.0",
+    "eslint-config-xo-react": "^0.10.0",
+    "eslint-plugin-react": "^6.8.0",
     "express": "^4.14.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^9.9.1",
     "node-sass": "^4.1.1",
     "opener": "^1.4.2",
     "react-addons-test-utils": "^15.4.1",
+    "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
-    "webpack": "^2.2.0-rc.3"
+    "webpack": "^2.2.0-rc.3",
+    "xo": "^0.17.1"
   },
   "dependencies": {
     "react": "^15.4.1",
@@ -63,5 +69,46 @@
       "babel-register",
       "./tests/setup-browser-env.js"
     ]
+  },
+  "xo": {
+    "space": 4,
+    "esnext": true,
+    "globals": [
+      "window",
+      "document",
+      "self"
+    ],
+    "extends": "xo-react",
+    "rules": {
+      "padded-blocks": "off",
+      "max-lines": [
+        2,
+        500
+      ],
+      "object-curly-spacing": [
+        2,
+        "always"
+      ],
+      "new-cap": "off",
+      "array-bracket-spacing": "off",
+      "max-nested-callbacks": [
+        1,
+        5
+      ],
+      "no-unused-vars": [
+        1,
+        {
+          "varsIgnorePattern": "element"
+        }
+      ],
+      "default-case": "off",
+      "no-unused-expressions": "off",
+      "no-case-declarations": "off",
+      "import/no-unassigned-import": "off",
+      "import/no-named-as-default": "off",
+      "import/prefer-default-export": "off",
+      "react/jsx-space-before-closing": "off",
+      "no-duplicate-imports": "off"
+    }
   }
 }
