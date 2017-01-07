@@ -31,12 +31,16 @@ section.header {
       display: flex;
       align-items: center;
       font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
-      font-size: 10px;
+      font-size: 12px;
       color: rgba(0, 0, 0, .5);
 
       a {
         @include link;
         padding-left: 3px;
+        max-width: 40vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       img {

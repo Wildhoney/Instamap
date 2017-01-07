@@ -185,7 +185,7 @@ export default class Authenticate extends Component {
         const { getAccessToken } = this.props;
         const { code, errorDescription } = camelizeKeys({ ...this.props.location.query });
         const errorMessage = this.state.errorMessage || errorDescription;
-        const isAuthenticating = code && !errorMessage;
+        const isAuthenticating = Boolean(getAccessToken() || (code && !errorMessage));
 
         // We only make the request for the access token if we don't already have one.
         const requestCode = getAccessToken() ? null : code;

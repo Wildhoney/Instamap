@@ -122,7 +122,7 @@ test('It should attempt to obtain the access token from the local storage;', t =
     const props = { ...t.context.getProps(), getAccessToken: spy(() => accessToken) };
     const wrapper = shallow(<Authenticate {...props} />);
 
-    t.is(wrapper.find('button').length, 1);
+    t.is(wrapper.find('button').length, 0);
 
     t.true(props.getAccessToken.called);
 
@@ -133,6 +133,8 @@ test('It should attempt to obtain the access token from the local storage;', t =
             // With an access token a request will be made for the user profile.
             t.is(props.dispatch.callCount, 1);
             t.true(props.dispatch.calledWith(fetchUser(accessToken)));
+
+            t.is(wrapper.find('button').length, 0);
 
             resolve();
 
