@@ -26,12 +26,8 @@ app.get('/authenticate/:code', (req, res) => {
 
     // Make the request for the access token from the Instagram API
     const params = stringify(decamelizeKeys({ clientSecret, grantType, redirectUri, clientId, code }));
-    post(accessTokenUri, params).then(response => {
-        console.log(response.data);
-        res.send(JSON.stringify({ accessToken: req.params.code }));
-    }).catch(response => {
-        console.log(response);
-    });
+    post(accessTokenUri, params).then(response => res.send(response.data))
+                                .catch(error => res.status(403).send(JSON.stringify(error.response.data)));
 
 
 });

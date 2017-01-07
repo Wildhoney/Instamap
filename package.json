@@ -29,6 +29,7 @@
   "devDependencies": {
     "ava": "^0.17.0",
     "axios": "^0.15.3",
+    "axios-mock-adapter": "^1.7.1",
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
@@ -121,6 +122,8 @@
       "import/prefer-default-export": "off",
       "react/jsx-space-before-closing": "off",
       "react/jsx-no-bind": "off",
+      "import/extensions": "off",
+      "no-warning-comments": "off",
       "no-duplicate-imports": "off"
     }
   }

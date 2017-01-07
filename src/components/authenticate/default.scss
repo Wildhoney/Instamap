@@ -4,6 +4,14 @@ section.authenticate {
   padding: 20px;
   text-align: center;
 
+  div.error {
+    color: crimson;
+    font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+    font-weight: bold;
+    padding-bottom: 10px;
+    font-size: 12px;
+  }
+
   p {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
     font-size: 12px;

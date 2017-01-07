@@ -15,7 +15,7 @@ export default class Layout extends Component {
             <section className="layout">
                 <Header />
                 <main>
-                    <Authenticate />
+                    <Authenticate {...this.props} />
                 </main>
             </section>
         );

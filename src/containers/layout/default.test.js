@@ -6,7 +6,11 @@ import Authenticate from '../../components/authenticate/default';
 import Layout from './default';
 
 test('It should be able to find the necessary components;', t => {
-    const wrapper = shallow(<Layout />);
+
+    const props = { location: { query: { code: 'test' } } };
+    const wrapper = shallow(<Layout {...props} />);
+
     t.is(wrapper.find(Header).length, 1);
     t.is(wrapper.find(Authenticate).length, 1);
+
 });
