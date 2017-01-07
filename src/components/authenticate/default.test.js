@@ -4,15 +4,15 @@ import { spy } from 'sinon';
 import { shallow } from 'enzyme';
 import { camelizeKeys } from 'humps';
 import format from 'string-template';
-import Authenticate from './default';
 import config from '../../../.instamap.yml';
+import Authenticate from './default';
 
 test('It should be able to redirect the user to authenticate;', t => {
 
     const { instamap: { redirectUrl }, instagram: { clientId, authUrl } } = camelizeKeys(config);
     const url = format(authUrl, { redirectUrl, clientId });
 
-    const props = { redirecter: spy(console.log) };
+    const props = { redirecter: spy() };
     const wrapper = shallow(<Authenticate {...props} />);
     const button = wrapper.find('button');
 

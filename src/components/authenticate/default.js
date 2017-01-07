@@ -19,7 +19,16 @@ export default class Authenticate extends Component {
      * @type {Object}
      */
     static defaultProps = {
-        redirecter: path => window.location.href = path
+
+        /**
+         * @method redirecter
+         * @param {String} path
+         * @return {void}
+         */
+        redirecter: path => {
+            window.location.href = path;
+        }
+
     };
 
     /**
