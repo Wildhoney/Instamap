@@ -12,4 +12,4 @@ yarn.lock
 # public
 public/default.js
 public/default.js.map
-public/images/*
+public/images/media
