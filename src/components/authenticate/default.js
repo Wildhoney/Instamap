@@ -38,8 +38,8 @@ export default class Authenticate extends Component {
     redirect() {
 
         // Construct the URL that the user will be sent to for authentication.
-        const { instamap: { redirectUrl }, instagram: { clientId, authUrl } } = camelizeKeys(config);
-        const url = format(authUrl, { redirectUrl, clientId });
+        const { instamap: { redirectUri }, instagram: { clientId, authUri } } = camelizeKeys(config);
+        const url = format(authUri, { redirectUri, clientId });
 
         // Invoke the redirecter which will forward the user to Instagram to authenticate the app.
         this.props.redirecter(url);

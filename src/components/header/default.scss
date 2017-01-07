@@ -1,13 +1,51 @@
+@import '../../mixins/link';
+
 section.header {
+  $height: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, .05);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .05);
+  height: $height;
 
   h1 {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
     font-size: 0.75em;
-    padding: 10px 10px 10px 32px;
+    padding: 0 10px 0 38px;
     text-transform: uppercase;
     background: transparent url('/images/icon.png') no-repeat 10px center;
-    border-bottom: 1px solid rgba(0, 0, 0, .05);
-    box-shadow: 0 0 5px rgba(0, 0, 0, .05);
-    background-size: 15px;
+    background-size: $height / 2;
+    display: flex;
+    align-items: center;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid rgba(0, 0, 0, .05);
+    padding-left: 10px;
+
+    li {
+      display: flex;
+      align-items: center;
+      font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+      font-size: 10px;
+      color: rgba(0, 0, 0, .5);
+
+      a {
+        @include link;
+        padding-left: 3px;
+      }
+
+      img {
+        width: $height / 2;
+        margin-left: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .05);
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+    }
   }
 }
