@@ -1,9 +1,8 @@
-import { basename } from 'path';
-import { existsSync, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import http from 'http';
+import { stringify } from 'querystring';
 import express from 'express';
 import opener from 'opener';
-import { stringify } from 'querystring';
 import { safeLoad } from 'js-yaml';
 import { post } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
@@ -12,7 +11,7 @@ const app = express();
 const server = http.createServer(app);
 const isHeroku = 'HEROKU_APP_NAME' in process.env;
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(`${__dirname}/public`));
 
 app.get('/authenticate/:code', (req, res) => {
 
@@ -27,8 +26,7 @@ app.get('/authenticate/:code', (req, res) => {
     // Make the request for the access token from the Instagram API
     const params = stringify(decamelizeKeys({ clientSecret, grantType, redirectUri, clientId, code }));
     post(accessTokenUri, params).then(response => res.send(response.data))
-                                .catch(error => res.status(403).send(JSON.stringify(error.response.data)));
-
+                                .catch(err => res.status(403).send(JSON.stringify(err.response.data)));
 
 });
 
