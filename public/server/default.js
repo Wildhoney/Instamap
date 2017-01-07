@@ -19,7 +19,8 @@ app.get('/authenticate/:code', (req, res) => {
     const config = safeLoad(readFileSync('./.instamap.yml', 'utf-8'));
 
     // Gather all of the variables required for making the access token request.
-    const { instamap: { redirectUri }, instagram: { accessTokenUri, clientId } } = camelizeKeys(config);
+    const redirectUri = `${req.protocol}://${req.get('host')}/`;
+    const { instagram: { accessTokenUri, clientId } } = camelizeKeys(config);
     const { code } = req.params;
     const clientSecret = process.env.INSTAGRAM_CLIENT_SECRET;
     const grantType = 'authorization_code';
@@ -45,4 +46,4 @@ app.get('/user/:userId/:accessToken', (req, res) => {
 });
 
 server.listen(process.env.PORT || 5000);
-!isHeroku && opener('http://127.0.0.1:5000');
+!isHeroku && opener('http://localhost:5000');

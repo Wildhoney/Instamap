@@ -1,6 +1,3 @@
-instamap:
-  redirect_uri: http://localhost:5000/
-
 instagram:
   user_uri: https://api.instagram.com/v1/users/{userId}/?access_token={accessToken}
   auth_uri: https://api.instagram.com/oauth/authorize/?client_id={clientId}&redirect_uri={redirectUri}&response_type=code

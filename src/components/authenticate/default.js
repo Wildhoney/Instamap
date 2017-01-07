@@ -36,7 +36,8 @@ export default class Authenticate extends Component {
         getAccessToken: PropTypes.func.isRequired,
         setAccessToken: PropTypes.func.isRequired,
         user: PropTypes.object.isRequired,
-        browserHistory: PropTypes.object.isRequired
+        browserHistory: PropTypes.object.isRequired,
+        redirectUri: PropTypes.func.isRequired
     };
 
     /**
@@ -71,7 +72,13 @@ export default class Authenticate extends Component {
          * @constant browserHistory
          * @type {Object}
          */
-        browserHistory
+        browserHistory,
+
+        /**
+         * @constant redirectUri
+         * @type {Function}
+         */
+        redirectUri: () => `${window.location.origin}/`
 
     };
 
@@ -110,7 +117,8 @@ export default class Authenticate extends Component {
     redirectInstagram() {
 
         // Construct the URL that the user will be sent to for authentication.
-        const { instamap: { redirectUri }, instagram: { clientId, authUri } } = camelizeKeys(config);
+        const redirectUri = this.props.redirectUri();
+        const { instagram: { clientId, authUri } } = camelizeKeys(config);
         const url = format(authUri, { redirectUri, clientId });
 
         // Invoke the redirecter which will forward the user to Instagram to authenticate the app.

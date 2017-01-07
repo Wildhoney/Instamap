@@ -17,6 +17,7 @@ test.beforeEach(t => {
 
     t.context.mock = new MockAdapter(axios);
     t.context.clientId = 'abcdefghijklmnopqrstuvwxyz';
+    t.context.redirectUri = 'http://example.org/';
     t.context.getProps = (query = {}) => {
 
         return {
@@ -26,7 +27,8 @@ test.beforeEach(t => {
             setAccessToken: spy(),
             user: {},
             dispatch: spy(() => Promise.resolve()),
-            browserHistory: { push: () => {} }
+            browserHistory: { push: () => {} },
+            redirectUri: () => t.context.redirectUri
         };
 
     };
@@ -35,8 +37,8 @@ test.beforeEach(t => {
 
 test('It should be able to redirect the user to authenticate;', t => {
 
-    const { instamap: { redirectUri }, instagram: { clientId, authUri } } = camelizeKeys(config);
-    const url = format(authUri, { redirectUri, clientId });
+    const { instagram: { clientId, authUri } } = camelizeKeys(config);
+    const url = format(authUri, { redirectUri: t.context.redirectUri, clientId });
 
     const props = t.context.getProps();
     const wrapper = shallow(<Authenticate {...props} />);
