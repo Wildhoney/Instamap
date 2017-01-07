@@ -35,7 +35,8 @@ export default class Authenticate extends Component {
         dispatch: PropTypes.func.isRequired,
         getAccessToken: PropTypes.func.isRequired,
         setAccessToken: PropTypes.func.isRequired,
-        user: PropTypes.object.isRequired
+        user: PropTypes.object.isRequired,
+        browserHistory: PropTypes.object.isRequired
     };
 
     /**
@@ -64,7 +65,13 @@ export default class Authenticate extends Component {
          * @param {String} accessToken
          * @return {void}
          */
-        setAccessToken: accessToken => window.localStorage.setItem(KEY, accessToken)
+        setAccessToken: accessToken => window.localStorage.setItem(KEY, accessToken),
+
+        /**
+         * @constant browserHistory
+         * @type {Object}
+         */
+        browserHistory
 
     };
 
@@ -76,7 +83,7 @@ export default class Authenticate extends Component {
 
         // Attempt to load the user profile from the stored access token.
         const accessToken = this.props.getAccessToken();
-        accessToken && this.props.dispatch(fetchUser(accessToken)).then(this.redirectRoot);
+        accessToken && this.props.dispatch(fetchUser(accessToken)).then(this.redirectRoot.bind(this));
 
     }
 
@@ -118,7 +125,7 @@ export default class Authenticate extends Component {
     redirectRoot() {
 
         // Redirect to the root path to remove any query parameters.
-        browserHistory.push('/');
+        this.props.browserHistory.push('/');
 
     }
 
@@ -150,7 +157,7 @@ export default class Authenticate extends Component {
                 // Dispatch the action to fetch the user profile, and store the access token for subsequent
                 // page loads.
                 const accessToken = camelizeKeys(response.data).accessToken;
-                this.props.dispatch(fetchUser(accessToken)).then(this.redirectRoot);
+                this.props.dispatch(fetchUser(accessToken)).then(this.redirectRoot.bind(this));
                 this.props.setAccessToken(accessToken);
 
             })

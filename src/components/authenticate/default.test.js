@@ -25,7 +25,8 @@ test.beforeEach(t => {
             getAccessToken: spy(),
             setAccessToken: spy(),
             user: {},
-            dispatch: spy()
+            dispatch: spy(() => Promise.resolve()),
+            browserHistory: { push: () => {} }
         };
 
     };

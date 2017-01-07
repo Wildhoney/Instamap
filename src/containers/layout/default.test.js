@@ -8,7 +8,17 @@ import Component from './default';
 test('It should be able to find the necessary components;', t => {
 
     const Layout = Component.WrappedComponent;
-    const props = { location: { query: { code: 'test' } }, user: {}, dispatch: () => {} };
+    const props = {
+        location: {
+            query: {
+                code: 'test'
+            }
+        },
+        user: {},
+        dispatch: () => {},
+        browserHistory: { push: () => {} }
+    };
+
     const wrapper = shallow(<Layout {...props} />);
 
     t.is(wrapper.find(Header).length, 1);
