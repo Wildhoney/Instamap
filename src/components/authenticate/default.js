@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import format from 'string-template';
 import { camelizeKeys } from 'humps';
 import { get } from 'axios';
+import { browserHistory } from 'react-router';
 import { fetchUser } from '../../shared/actions';
 import config from '../../../.instamap.yml';
 import './default.scss';
@@ -75,7 +76,7 @@ export default class Authenticate extends Component {
 
         // Attempt to load the user profile from the stored access token.
         const accessToken = this.props.getAccessToken();
-        accessToken && this.props.dispatch(fetchUser(accessToken));
+        accessToken && this.props.dispatch(fetchUser(accessToken)).then(this.redirectRoot);
 
     }
 
@@ -96,10 +97,10 @@ export default class Authenticate extends Component {
     }
 
     /**
-     * @method redirect
+     * @method redirectInstagram
      * @return {void}
      */
-    redirect() {
+    redirectInstagram() {
 
         // Construct the URL that the user will be sent to for authentication.
         const { instamap: { redirectUri }, instagram: { clientId, authUri } } = camelizeKeys(config);
@@ -107,6 +108,17 @@ export default class Authenticate extends Component {
 
         // Invoke the redirecter which will forward the user to Instagram to authenticate the app.
         this.props.redirecter(url);
+
+    }
+
+    /**
+     * @method redirectRoot
+     * @return {void}
+     */
+    redirectRoot() {
+
+        // Redirect to the root path to remove any query parameters.
+        browserHistory.push('/');
 
     }
 
@@ -120,7 +132,7 @@ export default class Authenticate extends Component {
         return [
             errorMessage && <div key="error" className="error">Problem: {errorMessage}</div>,
             <p key="message">Unfortunately Instagram requires users to authorise applications before displaying any public content.</p>,
-            <button key="action" accessKey="a" onClick={() => this.redirect()}>Authenticate</button>
+            <button key="action" accessKey="a" onClick={() => this.redirectInstagram()}>Authenticate</button>
         ];
 
     }
@@ -138,7 +150,7 @@ export default class Authenticate extends Component {
                 // Dispatch the action to fetch the user profile, and store the access token for subsequent
                 // page loads.
                 const accessToken = camelizeKeys(response.data).accessToken;
-                this.props.dispatch(fetchUser(accessToken));
+                this.props.dispatch(fetchUser(accessToken)).then(this.redirectRoot);
                 this.props.setAccessToken(accessToken);
 
             })
@@ -168,9 +180,12 @@ export default class Authenticate extends Component {
         const errorMessage = this.state.errorMessage || errorDescription;
         const isAuthenticating = code && !errorMessage;
 
+        // We only make the request for the access token if we don't already have one.
+        const requestCode = getAccessToken() ? null : code;
+
         return (
             <section className="authenticate">
-                {isAuthenticating ? this.authenticate(getAccessToken() ? null : code) : this.notification(errorMessage)}
+                {isAuthenticating ? this.authenticate(requestCode) : this.notification(errorMessage)}
             </section>
         );
 
