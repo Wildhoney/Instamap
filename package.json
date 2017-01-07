@@ -28,6 +28,7 @@
   "homepage": "https://github.com/Wildhoney/Instamap#readme",
   "devDependencies": {
     "ava": "^0.17.0",
+    "axios": "^0.15.3",
     "babel-cli": "^6.18.0",
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.20.0",
@@ -39,11 +40,9 @@
     "enzyme": "^2.7.0",
     "eslint-config-xo-react": "^0.10.0",
     "eslint-plugin-react": "^6.8.0",
-    "express": "^4.14.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^9.9.1",
     "node-sass": "^4.1.1",
-    "opener": "^1.4.2",
     "react-addons-test-utils": "^15.4.1",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
@@ -52,6 +51,9 @@
     "xo": "^0.17.1"
   },
   "dependencies": {
+    "axios": "^0.15.3",
+    "express": "^4.14.0",
+    "opener": "^1.4.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0"
