@@ -15,6 +15,7 @@ before_deploy:
 sudo: false
 
 deploy:
+  all_branches: true
   skip_cleanup: true
   provider: heroku
   api_key:
