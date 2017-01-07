@@ -17,6 +17,10 @@ section.authenticate {
     font-size: 12px;
   }
 
+  img.logo {
+    width: 50vw;
+  }
+
   button {
     @include buttonBold;
     margin-top: 20px;

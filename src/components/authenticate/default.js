@@ -146,6 +146,7 @@ export default class Authenticate extends Component {
 
         return [
             errorMessage && <div key="error" className="error">Problem: {errorMessage}</div>,
+            <img key="logo" className="logo" src="/images/instagram.jpg" alt="Instagram" />,
             <p key="message">Unfortunately Instagram requires users to authorise applications before displaying any public content.</p>,
             <button key="action" accessKey="a" onClick={() => this.redirectInstagram()}>Authenticate</button>
         ];
