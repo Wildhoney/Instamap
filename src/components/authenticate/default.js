@@ -78,7 +78,7 @@ export default class Authenticate extends Component {
          * @constant redirectUri
          * @type {Function}
          */
-        redirectUri: () => `${window.location.origin}/`
+        redirectUri: () => format(camelizeKeys(config).instamap.redirectPattern, { redirectUri: window.location.origin })
 
     };
 

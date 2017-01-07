@@ -16,11 +16,11 @@ app.use(express.static(`${__dirname}/public`));
 
 app.get('/authenticate/:code', (req, res) => {
 
-    const config = safeLoad(readFileSync('./.instamap.yml', 'utf-8'));
+    const { instamap, instagram } = camelizeKeys(safeLoad(readFileSync('./.instamap.yml', 'utf-8')));
 
     // Gather all of the variables required for making the access token request.
-    const redirectUri = `${req.protocol}://${req.get('host')}/`;
-    const { instagram: { accessTokenUri, clientId } } = camelizeKeys(config);
+    const redirectUri = format(instamap.redirectPattern, { redirectUri: `${req.protocol}://${req.get('host')}` });
+    const { accessTokenUri, clientId } = instagram;
     const { code } = req.params;
     const clientSecret = process.env.INSTAGRAM_CLIENT_SECRET;
     const grantType = 'authorization_code';
