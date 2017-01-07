@@ -18,6 +18,10 @@ module.exports = {
                 loaders: ['json-loader']
             },
             {
+                test: /\.yml$/,
+                loaders: ['json-loader', 'yaml-loader']
+            },
+            {
                 test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader', 'sass-loader']
             }

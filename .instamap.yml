@@ -1,0 +1,6 @@
+instamap:
+  redirect_url: http://localhost:5000/
+
+instagram:
+  auth_url: https://api.instagram.com/oauth/authorize/?client_id={clientId}&redirect_uri={redirectUrl}&response_type=code
+  client_id: d5a7f5922ff94028b89e0e31b0314e78

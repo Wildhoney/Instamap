@@ -11,11 +11,5 @@ const isHeroku = 'HEROKU_APP_NAME' in process.env;
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/authenticate', (req, res) => {
-
-    res.send('Instamap');
-
-});
-
 server.listen(process.env.PORT || 5000);
 !isHeroku && opener('http://127.0.0.1:5000');
