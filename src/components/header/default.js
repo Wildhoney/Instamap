@@ -1,7 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './default.scss';
 
 export default class Header extends Component {
+
+    /**
+     * @constant propTypes
+     * @type {Object}
+     */
+    static propTypes = {
+        user: PropTypes.shape({
+            id: PropTypes.string,
+            fullName: PropTypes.string,
+            profilePicture: PropTypes.string,
+            username: PropTypes.string
+        }).isRequired
+    };
 
     /**
      * @method render
@@ -9,13 +22,23 @@ export default class Header extends Component {
      */
     render() {
 
+        const { user } = this.props;
+        const isAuthenticated = 'id' in user;
+
         return (
             <section className="header">
+
                 <h1>Instamap.</h1>
-                <ul>
-                    <li>Hello, <a href="https://www.instagram.com/wildhoooney/">Wildhoney</a></li>
-                    <li><img src="https://avatars1.githubusercontent.com/u/1528477?v=3&s=460" alt="Profile Picture"/></li>
-                </ul>
+
+                {isAuthenticated && (
+
+                    <ul>
+                        <li>Hello, <a href={`https://www.instagram.com/${user.username}/`}>{user.fullName}</a></li>
+                        <li><img src={user.profilePicture} alt="Profile Picture" /></li>
+                    </ul>
+
+                )}
+
             </section>
         );
 

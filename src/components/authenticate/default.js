@@ -2,8 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import format from 'string-template';
 import { camelizeKeys } from 'humps';
 import { get } from 'axios';
-import './default.scss';
+import { fetchUser } from '../../shared/actions';
 import config from '../../../.instamap.yml';
+import './default.scss';
+
+/**
+ * @constant KEY
+ * @type {String}
+ */
+export const KEY = 'accessToken';
 
 export default class Authenticate extends Component {
 
@@ -23,7 +30,11 @@ export default class Authenticate extends Component {
             query: PropTypes.shape({
                 code: PropTypes.string
             }).isRequired
-        }).isRequired
+        }).isRequired,
+        dispatch: PropTypes.func.isRequired,
+        getAccessToken: PropTypes.func.isRequired,
+        setAccessToken: PropTypes.func.isRequired,
+        user: PropTypes.object.isRequired
     };
 
     /**
@@ -39,9 +50,34 @@ export default class Authenticate extends Component {
          */
         redirecter: path => {
             window.location.href = path;
-        }
+        },
+
+        /**
+         * @method getAccessToken
+         * @return {String}
+         */
+        getAccessToken: () => window.localStorage.getItem(KEY),
+
+        /**
+         * @method setAccessToken
+         * @param {String} accessToken
+         * @return {void}
+         */
+        setAccessToken: accessToken => window.localStorage.setItem(KEY, accessToken)
 
     };
+
+    /**
+     * @method componentWillMount
+     * @return {void}
+     */
+    componentWillMount() {
+
+        // Attempt to load the user profile from the stored access token.
+        const accessToken = this.props.getAccessToken();
+        accessToken && this.props.dispatch(fetchUser(accessToken));
+
+    }
 
     /**
      * @method shouldComponentUpdate
@@ -53,8 +89,9 @@ export default class Authenticate extends Component {
 
         const codeEqual = this.props.location.query === nextProps.location.query;
         const errorMessageEqual = this.state.errorMessage === nextState.errorMessage;
+        const userEqual = this.props.user === nextProps.user;
 
-        return !codeEqual || !errorMessageEqual;
+        return !codeEqual || !errorMessageEqual || !userEqual;
 
     }
 
@@ -95,8 +132,16 @@ export default class Authenticate extends Component {
      */
     authenticate(code) {
 
-        get(`/authenticate/${code}`)
-            .then(response => console.log(camelizeKeys(response.data).accessToken))
+        code && get(`/authenticate/${code}`)
+            .then(response => {
+
+                // Dispatch the action to fetch the user profile, and store the access token for subsequent
+                // page loads.
+                const accessToken = camelizeKeys(response.data).accessToken;
+                this.props.dispatch(fetchUser(accessToken));
+                this.props.setAccessToken(accessToken);
+
+            })
             .catch(err => {
 
                 // Re-render the component with the locally stored error from the API.
@@ -118,15 +163,17 @@ export default class Authenticate extends Component {
      */
     render() {
 
+        const { getAccessToken } = this.props;
         const { code, errorDescription } = camelizeKeys({ ...this.props.location.query });
         const errorMessage = this.state.errorMessage || errorDescription;
         const isAuthenticating = code && !errorMessage;
 
         return (
             <section className="authenticate">
-                {isAuthenticating ? this.authenticate(code) : this.notification(errorMessage)}
+                {isAuthenticating ? this.authenticate(getAccessToken() ? null : code) : this.notification(errorMessage)}
             </section>
         );
 
     }
+
 }
