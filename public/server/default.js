@@ -32,18 +32,30 @@ app.get('/authenticate/:code', (req, res) => {
 
 });
 
-app.get('/user/:userId/:accessToken', (req, res) => {
+/**
+ * @method fetchData
+ * @param {String} uriKey
+ * @return {Function}
+ */
+const fetchDataFrom = uriKey => {
 
-    const config = safeLoad(readFileSync('./.instamap.yml', 'utf-8'));
+    return (req, res) => {
 
-    // Gather all of the variables required for obtaining the user profile.
-    const { instagram: { userUri } } = camelizeKeys(config);
+        const config = safeLoad(readFileSync('./.instamap.yml', 'utf-8'));
 
-    // Make the request for the user profile from the Instagram API.
-    get(format(userUri, req.params)).then(response => res.send(response.data.data))
+        // Gather all of the variables required for obtaining the user profile.
+        const uri = camelizeKeys(config).instagram[uriKey];
+
+        // Make the request for the user profile from the Instagram API.
+        get(format(uri, req.params)).then(response => res.send(response.data.data))
                                     .catch(err => res.status(403).send(JSON.stringify(err.response.data)));
 
-});
+    };
+
+};
+
+app.get('/user/:userId/:accessToken', fetchDataFrom('userUri'));
+app.get('/media/:userId/:accessToken', fetchDataFrom('mediaUri'));
 
 server.listen(process.env.PORT || 5000);
 !isHeroku && opener('http://localhost:5000');
