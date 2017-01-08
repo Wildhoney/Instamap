@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapsLoader from 'google-maps';
+import Search from '../search/default';
 import './default.scss';
 
 export default class Map extends Component {
@@ -32,16 +33,8 @@ export default class Map extends Component {
 
         return (
             <section className="map">
-
-                <div className="search">
-                    <input type="text" placeholder="Enter an Instagram username..." />
-                    <button type="button" disabled>Create Map</button>
-                </div>
-
-                <div className="container" ref={node => node && this.map(node)}>
-                    <label>Loading Maps...</label>
-                </div>
-
+                <Search {...this.props} />
+                <div className="container" ref={node => node && this.map(node)} />
             </section>
         );
 
