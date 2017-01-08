@@ -51,6 +51,7 @@
     "sass-loader": "^4.1.1",
     "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
+    "uuid": "^3.0.1",
     "webpack": "^2.2.0-rc.3",
     "xo": "^0.17.1",
     "yaml-loader": "^0.4.0"
@@ -59,9 +60,12 @@
     "axios": "^0.15.3",
     "es6-symbol": "^3.1.0",
     "express": "^4.14.0",
+    "google-maps": "^3.2.1",
     "humps": "^2.0.0",
+    "nprogress": "^0.2.0",
     "opener": "^1.4.2",
     "querystring": "^0.2.0",
+    "ramda": "^0.23.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
@@ -127,7 +131,9 @@
       "react/jsx-no-bind": "off",
       "import/extensions": "off",
       "no-warning-comments": "off",
-      "no-duplicate-imports": "off"
+      "no-duplicate-imports": "off",
+      "max-params": [1, 5],
+      "no-new": "off"
     }
   }
 }

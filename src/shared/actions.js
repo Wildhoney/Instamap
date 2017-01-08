@@ -1,5 +1,5 @@
 import { get } from 'axios';
-import { FETCH_USER } from './types';
+import { FETCH_USER, SET_ERROR } from './types';
 
 /**
  * @constant SELF
@@ -16,4 +16,13 @@ const SELF = 'self';
 export function fetchUser(accessToken, userId = SELF) {
     const promise = get(`/user/${userId}/${accessToken}`).then(response => response.data);
     return { type: FETCH_USER, promise };
+}
+
+/**
+ * @method setError
+ * @param {String} error
+ * @return {Object}
+ */
+export function setError(error) {
+    return { type: SET_ERROR, result: error };
 }

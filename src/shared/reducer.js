@@ -1,13 +1,14 @@
 import { SUCCESS, FAILURE } from '../middleware/promise';
 import { KEY } from '../components/authenticate/default';
-import { FETCH_USER } from './types';
+import { FETCH_USER, SET_ERROR } from './types';
 
 /**
  * @constant INITIAL_STATE
  * @type {Object}
  */
 const INITIAL_STATE = {
-    user: {}
+    user: {},
+    error: ''
 };
 
 /**
@@ -41,6 +42,9 @@ export default (state = INITIAL_STATE, action) => {
 
                 case FETCH_USER:
                     return { ...state, user: action.result };
+
+                case SET_ERROR:
+                    return { ...state, error: action.result };
 
                 default:
                     return state;

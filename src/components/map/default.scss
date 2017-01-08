@@ -17,18 +17,25 @@ section.map {
     color: rgba(0, 0, 0, .5);
   }
 
-  div.search {
-    $height: 40px;
+  div.container {
+    width: 100%;
+    height: 100%;
+  }
 
-    border-bottom: 1px solid rgba(0, 0, 0, .05);
+  div.search {
+    $height: 60px;
+
     height: $height;
     display: flex;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, .1);
+    position: relative;
+    z-index: 101;
 
     input[type="text"] {
       height: $height;
       background-color: transparent;
       width: 100%;
-      padding: 0 15px;
+      padding: 0 20px;
       border: 0;
       outline: none;
       font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
@@ -38,16 +45,23 @@ section.map {
     button[type="button"] {
       border: 0;
       border-left: 1px solid rgba(0, 0, 0, .05);
+      background-color: transparent;
       border-radius: 0;
-      background-color: white;
       user-select: none;
       font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
-      cursor: pointer;
       outline: none;
       padding: 0 20px;
       font-weight: bold;
       text-transform: uppercase;
       white-space: nowrap;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+
+      &:not(:disabled) {
+        cursor: pointer;
+      }
     }
   }
 }
