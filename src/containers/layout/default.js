@@ -5,10 +5,10 @@ import { compose } from 'ramda';
 import { get } from 'axios';
 import Header from '../../components/header/default';
 import Authenticate from '../../components/authenticate/default';
-import Map from '../../components/map/default';
 import { fetchUser, setError } from '../../shared/actions';
 import { setAccessToken, getAccessToken, removeParameter } from './helpers';
 import './default.scss';
+import ShadowDOM from 'react-shadow';
 
 /**
  * @method handleState
@@ -77,12 +77,14 @@ export default connect(handleState)(class Layout extends Component {
         const isAuthenticated = 'id' in this.props.user;
 
         return (
-            <section className="layout">
-                <Header {...this.props} />
-                <main>
-                    {isAuthenticated ? <Map {...this.props} /> : <Authenticate {...this.props} />}
-                </main>
-            </section>
+            <ShadowDOM>
+                <section className="layout">
+                    <Header {...this.props} />
+                    <main>
+                        {isAuthenticated ? this.props.children : <Authenticate {...this.props} />}
+                    </main>
+                </section>
+            </ShadowDOM>
         );
 
     }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import GoogleMapsLoader from 'google-maps';
+import L from 'leaflet';
+import 'leaflet.markercluster';
+import { camelizeKeys } from 'humps';
+import config from '../../../.instamap.yml';
 import Search from '../search/default';
 import './default.scss';
 
@@ -12,16 +15,17 @@ export default class Map extends Component {
      */
     map(node) {
 
-        GoogleMapsLoader.KEY = 'AIzaSyCgqI70Yz4ETQ_IHtQLV8QhJ12VMJ6jDBY';
+        // Instantiate L.Map and take the tile URI from the config.
+        const map = new L.Map(node, { doubleClickZoom: false }).setView([51.505, -0.09], 14);
+        L.tileLayer(camelizeKeys(config).instamap.tileUri).addTo(map);
 
-        GoogleMapsLoader.load(google => {
+        const icon = new L.DivIcon({ className: 'preview', iconSize: [100, 100] });
+        const marker = new L.Marker([50.505, 30.57], { icon });
 
-            const center = new google.maps.LatLng(-34.397, 150.644);
-            const options = { center, zoom: 15, zoomControl: true };
-
-            new google.maps.Map(node, options);
-
-        });
+        const cluster = new L.MarkerClusterGroup();
+        cluster.addLayer(marker);
+        map.addLayer(cluster);
+        map.fitBounds(cluster.getBounds());
 
     }
 

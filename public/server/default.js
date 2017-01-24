@@ -12,8 +12,6 @@ const app = express();
 const server = http.createServer(app);
 const isHeroku = 'HEROKU_APP_NAME' in process.env;
 
-app.use(express.static(`${__dirname}/public`));
-
 app.get('/authenticate/:code', (req, res) => {
 
     const { instamap, instagram } = camelizeKeys(safeLoad(readFileSync('./.instamap.yml', 'utf-8')));
@@ -56,6 +54,12 @@ const fetchDataFrom = uriKey => {
 
 app.get('/user/:userId/:accessToken', fetchDataFrom('userUri'));
 app.get('/media/:userId/:accessToken', fetchDataFrom('mediaUri'));
+
+app.get('/profile/:userId', (_, res) => {
+    res.sendFile('index.html', { root: `public/${__dirname}` });
+});
+
+app.use(express.static(`${__dirname}/public`));
 
 server.listen(process.env.PORT || 5000);
 !isHeroku && opener('http://localhost:5000');

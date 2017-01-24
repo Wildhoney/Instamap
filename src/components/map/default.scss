@@ -1,4 +1,4 @@
-@import '../../mixins/button';
+@import './leaflet.scss';
 
 section.map {
   width: 100%;
@@ -10,5 +10,12 @@ section.map {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .1);
+  }
+
+  div.preview {
+    border: 2px solid white;
+    background: white url('https://scontent.cdninstagram.com/t51.2885-15/s150x150/e35/15625552_1163758960403994_6045809928235384832_n.jpg?ig_cache_key=MTQxNzg1MzEzNjExODMyMTU1NQ%3D%3D.2') no-repeat center center;
+    background-size: contain;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
   }
 }

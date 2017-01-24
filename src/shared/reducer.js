@@ -1,6 +1,6 @@
 import { SUCCESS, FAILURE } from '../middleware/promise';
 import { KEY } from '../components/authenticate/default';
-import { FETCH_USER, SET_ERROR } from './types';
+import { FETCH_USER, FETCH_MEDIA, SET_ERROR } from './types';
 
 /**
  * @constant INITIAL_STATE
@@ -8,6 +8,7 @@ import { FETCH_USER, SET_ERROR } from './types';
  */
 const INITIAL_STATE = {
     user: {},
+    media: [],
     error: ''
 };
 
@@ -42,6 +43,9 @@ export default (state = INITIAL_STATE, action) => {
 
                 case FETCH_USER:
                     return { ...state, user: action.result };
+
+                case FETCH_MEDIA:
+                    return { ...state, media: action.result };
 
                 case SET_ERROR:
                     return { ...state, error: action.result };

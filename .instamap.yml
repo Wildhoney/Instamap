@@ -1,5 +1,6 @@
 instamap:
   redirect_pattern: '{redirectUri}/'
+  tile_uri: https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png
 
 instagram:
   user_uri: https://api.instagram.com/v1/users/{userId}/?access_token={accessToken}

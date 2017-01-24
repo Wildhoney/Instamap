@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import progress from 'nprogress';
 import Layout from './containers/layout/default';
+import Profile from './containers/profile/default';
 
 /**
  * @method fetchFor
@@ -60,7 +61,9 @@ export default store => {
 
     return (
         <Router history={browserHistory}>
-            <Route path="/" component={Layout} onEnter={fetchData} />
+            <Route path="/" component={Layout} onEnter={fetchData}>
+                <Route path="/profile/:userId" component={Profile} onEnter={fetchData} />
+            </Route>
         </Router>
     );
 

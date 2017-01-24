@@ -60,8 +60,9 @@
     "axios": "^0.15.3",
     "es6-symbol": "^3.1.0",
     "express": "^4.14.0",
-    "google-maps": "^3.2.1",
     "humps": "^2.0.0",
+    "leaflet": "^1.0.2",
+    "leaflet.markercluster": "^1.0.0",
     "nprogress": "^0.2.0",
     "opener": "^1.4.2",
     "querystring": "^0.2.0",
@@ -132,7 +133,10 @@
       "import/extensions": "off",
       "no-warning-comments": "off",
       "no-duplicate-imports": "off",
-      "max-params": [1, 5],
+      "max-params": [
+        1,
+        5
+      ],
       "no-new": "off"
     }
   }
