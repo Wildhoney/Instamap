@@ -8,3 +8,8 @@
 node_modules
 npm-debug.log
 yarn.lock
+
+# public
+public/default.js
+public/default.js.map
+public/images/media

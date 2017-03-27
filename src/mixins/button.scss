@@ -1,0 +1,17 @@
+@mixin button($padding: 20px 40px) {
+  border-radius: 3px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  background: linear-gradient(darken(white, 2.5), darken(white, 5));
+  user-select: none;
+  padding: $padding;
+  font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin buttonBold($padding: 20px 40px) {
+  @include button($padding);
+  text-transform: uppercase;
+  font-weight: bold;
+}

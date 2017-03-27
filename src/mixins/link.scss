@@ -1,0 +1,8 @@
+@mixin link {
+  color: dodgerblue;
+  transition: color .25s;
+
+  &:hover {
+    color: black;
+  }
+}
